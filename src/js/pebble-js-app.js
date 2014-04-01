@@ -1,4 +1,3 @@
-var count = 0;
 var distanceRadius = 5;
 
 String.prototype.pad = function(_char, len, to) {
@@ -32,7 +31,6 @@ function fetchBuses(latitude, longitude) {
 		"EstimatedTime"
 	];
 
-	var response;
 	var req = new XMLHttpRequest();
 	req.onload = requestOnLoad;
 
@@ -52,27 +50,24 @@ function requestOnLoad(e) {
 	if (req.readyState == 4) {
 		if(req.status == 200) {
 
-			response = req.responseText.split('\n').slice(1);
+			var response = req.responseText.split('\n').slice(1);
 
 			var obj = {
 				"0": response.length
 			};
 
-	  		console.log("fetched " + response.length + " bus(es)");
+			console.log("fetched " + response.length + " bus(es)");
 
-			var index = 1;
-
-			for(i=0; i<response.length; i++) {
+			for(var i=0; i<response.length; i++) {
 				var a = JSON.parse(response[i]).slice(1),
-					o = [],
-					stopPointName = a[0],
-					stopCode = a[1],
+//					stopPointName = a[0],
+//					stopCode = a[1],
 					lineName = a[2],
 					destinationText = a[3],
 					d = new Date(),
 					// estimatedTime = parseDateTime(a[4] - (d.getTime() + (d.getTimezoneOffset() * 60000))),
 					estimatedTime = parseDateTime(a[4] - d.getTime()),
-					time = estimatedTime == 0 ? "Now!" : estimatedTime == 1 ? estimatedTime + " min" : estimatedTime + " mins";
+					time = estimatedTime === 0 ? "Now!" : estimatedTime == 1 ? estimatedTime + " min" : estimatedTime + " mins";
 
 				obj[i+100] = lineName + " - " + time;
 				obj[i+200] = "to " + destinationText;
@@ -103,7 +98,7 @@ function requestOnLoad(e) {
 			}
 		}
 	}
-};
+}
 
 function locationSuccess(pos) {
 	var coordinates = pos.coords;
@@ -114,8 +109,8 @@ function locationSuccess(pos) {
 function locationError(err) {
 	console.warn('location error (' + err.code + '): ' + err.message);
 	// Pebble.sendAppMessage({
-	// 	"city":"Loc Unavailable",
-	// 	"temperature":"N/A"
+	//		"city":"Loc Unavailable",
+	//		"temperature":"N/A"
 	// });
 }
 
@@ -123,10 +118,7 @@ var locationOptions = { "timeout": 15000, "maximumAge": 60000 };
 
 
 Pebble.addEventListener("ready", function(e) {
-	console.log("connect!" + e.ready);
-	console.log("geolocation: " + JSON.stringify(window.navigator.geolocation.watchPosition));
-	locationWatcher = window.navigator.geolocation.watchPosition(locationSuccess, locationError, locationOptions);
-	console.log("locationWatcher: " + JSON.stringify(locationWatcher));
+	window.navigator.geolocation.watchPosition(locationSuccess, locationError, locationOptions);
 });
 Pebble.addEventListener("appmessage", function(e) {
 	if(!!e.payload.refresh) {

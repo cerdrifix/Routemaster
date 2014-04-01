@@ -1,33 +1,36 @@
 {
-  "uuid": "7780d282-ba60-4a71-88d3-247c141ef45c",
-  "shortName": "Routemaster",
-  "longName": "Ruotemaster",
-  "companyName": "MaDdays",
-  "versionCode": 1,
-  "versionLabel": "1.0.0",
-  "watchapp": {
-    "watchface": false
-  },
-  "appKeys": {
-    "refresh": 0
-  },
-  "resources": {
-    "media": [
-      {
-        "type": "png",
-        "name": "SPLASHSCREEN",
-        "file": "images/routemaster.png"
-      },
-      {
-        "type": "png",
-        "name": "REFRESHING",
-        "file": "images/refreshing.png"
-      },
-      {
-        "type": "png",
-        "name": "NOBUSSTOP",
-        "file": "images/noBusStop.png"
-      }
-    ]
-  }
+    "versionLabel": "1.0.0",
+    "uuid": "7780d282-ba60-4a71-88d3-247c141ef45c",
+    "appKeys": {
+        "refresh": 0
+    },
+    "longName": "Ruotemaster",
+    "versionCode": 1,
+    "capabilities": [
+        ""
+    ],
+    "shortName": "Routemaster",
+    "companyName": "MaDdays",
+    "watchapp": {
+        "watchface": false
+    },
+    "resources": {
+        "media": [
+            {
+                "type": "png",
+                "name": "NOBUSSTOP",
+                "file": "images/noBusStop.png"
+            },
+            {
+                "type": "png",
+                "name": "REFRESHING",
+                "file": "images/refreshing.png"
+            },
+            {
+                "type": "png",
+                "name": "SPLASHSCREEN",
+                "file": "images/routemaster.png"
+            }
+        ]
+    }
 }
